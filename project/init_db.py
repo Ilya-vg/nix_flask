@@ -29,29 +29,35 @@ cur.execute('INSERT INTO users (username, email, password)'
             )
 
 cur.execute('DROP TABLE IF EXISTS movie;')
-cur.execute('CREATE TABLE movie (id serial PRIMARY KEY,'
-            'title varchar (255) NOT NULL',
-            'release_date date NOT NULL',
-            'description varchar (255)',
-            'rating int',
-            'poster bytea',
-            'user_added varchar (255) NOT NULL')
-
-cur.execute('DROP TABLE IF EXISTS movie_director;')
-cur.execute('CREATE TABLE movie_director (id int FOREIGN KEY,',
-            'movie_id int FOREIGN KEY')
-
-cur.execute('DROP TABLE IF EXISTS movie_genre;')
-cur.execute('CREATE TABLE movie_genre (genre_id int FOREIGN KEY,',
-            'movie_id int FOREIGN KEY')
+cur.execute('CREATE TABLE movie (id serial PRIMARY KEY UNIQUE,'
+            'title varchar (255) NOT NULL,'
+            'release_date date NOT NULL,'
+            'description varchar (255),'
+            'rating int,'
+            'poster bytea,'
+            'user_added varchar (255) NOT NULL);'
+            )
 
 cur.execute('DROP TABLE IF EXISTS genre;')
-cur.execute('CREATE TABLE genre (id int,',
-            'movie_id int ')
+cur.execute('CREATE TABLE genre (id serial PRIMARY KEY UNIQUE,'
+            'movie_id int);'
+            )
 
 cur.execute('DROP TABLE IF EXISTS director;')
-cur.execute('CREATE TABLE director (id int,',
-            'movie_id int')
+cur.execute('CREATE TABLE director (id serial PRIMARY KEY UNIQUE,'
+            'movie_id int);'
+            )
+
+cur.execute('DROP TABLE IF EXISTS movie_director;')
+cur.execute('CREATE TABLE movie_director (id int references director(id),'
+            'movie_id int references movie(id));'
+            )
+
+cur.execute('DROP TABLE IF EXISTS movie_genre;')
+cur.execute('CREATE TABLE movie_genre (genre_id int references genre(id),'
+            'movie_id int references movie(id));'
+            )
+
 
 conn.commit()
 
