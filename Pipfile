@@ -11,6 +11,8 @@ psycopg2-binary = "*"
 werkzeug = "*"
 jinja2 = "*"
 flask-wtf = "*"
+flask-bootstrap = "*"
+validators = "*"
 
 [dev-packages]
 

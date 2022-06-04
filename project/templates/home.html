@@ -1,15 +1,151 @@
 {% extends "base.html" %}
 
-<body>
+{% block content %}
+  <body>
+  <br>
 
-<div class='div_outer'>
-{%
-for movie in list_movies:
-%}
-  <div class='div_inner'>Movies in the database: {{ movie }}</div>
-{%
-endfor
-%}
-</div>
+  <table>
+    <thead><tr><th>id</th><th>Title</th><th>Director</th><th>Release Year</th><th>Description</th>
+    <th>Rating</th><th>Genres</th><th>Poster</th><th>Added by User</th></tr></thead>
+    <tbody>
+      {% if list_movies %}
+        {% for movie in list_movies: %}
+          <tr><td>{{ movie[0] }}</td>
+            <td>{{ movie[1] }}</td>
+            <td>{{ movie[2] }}</td>
+            <td>{{ movie[3] }}</td>
+            <td>{{ movie[4] }}</td>
+            <td>{{ movie[5] }}</td>
 
-</body>
+            <td>{{ ', '.join(movie[8:]) }}</td>
+
+            <td><a href={{ movie[6] }}>Link</a></td>
+            <td>{{ movie[7] }}</td></tr>
+        {% endfor %}
+      {% else %}
+        <div>No movies in the database yet.</div>
+      {% endif %}
+    </tbody>
+  </table>
+
+  <div>
+    <form method="POST">
+      <p style="text-align:center"; >Add a new film below</p>
+      <div class="form-group">
+        <label for="title">Film title</label>
+        <input type="text"
+               class="form-control"
+               id="title"
+               name="title"
+               placeholder="Enter film title">
+      </div>
+      <div>
+        <label for="director">Director</label>
+        <input type="text"
+               class="form-control"
+               id="director"
+               name="director"
+               placeholder="Film Director">
+      </div>
+      <div class="form-group">
+        <label for="release_date">Release year</label>
+        <input type="text"
+               class="form-control"
+               id="release_date"
+               name="release_year"
+               placeholder="Release year">
+      </div>
+      <div class="form-group">
+        <label for="description">Description (optional)</label>
+        <input type="text"
+               class="form-control"
+               id="description"
+               name="description"
+               placeholder="Description">
+      </div>
+
+      <div class="form-check form-check-inline">
+        Rating:
+        <input class="form-check-input" type="radio" name="rating" id="inlineRadio1" value="1">
+        <label class="form-check-label" for="inlineRadio1">1</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="inlineRadio2" value="2">
+        <label class="form-check-label" for="inlineRadio2">2</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="inlineRadio3" value="3">
+        <label class="form-check-label" for="inlineRadio3">3</label>
+      </div>
+            <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="inlineRadio4" value="4">
+        <label class="form-check-label" for="inlineRadio4">4</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="inlineRadio5" value="5">
+        <label class="form-check-label" for="inlineRadio5">5</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="inlineRadio6" value="6">
+        <label class="form-check-label" for="inlineRadio6">6</label>
+      </div>
+            <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="inlineRadio7" value="7">
+        <label class="form-check-label" for="inlineRadio7">7</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="inlineRadio8" value="8">
+        <label class="form-check-label" for="inlineRadio8">8</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="inlineRadio9" value="9">
+        <label class="form-check-label" for="inlineRadio9">9</label>
+      </div>
+            <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" name="rating" id="inlineRadio10" value="10">
+        <label class="form-check-label" for="inlineRadio10">10</label>
+            </div>
+      <br>
+      <br>
+      <div class="form-group">
+        <label for="poster">Poster</label>
+        <input type="url"
+               class="form-control"
+               id="poster"
+               name="poster"
+               placeholder="Link to a poster">
+      </div>
+
+    <fieldset>
+      <p>Film genre (one or multiple):</p>
+      <div>
+        <input type="checkbox" id="action" name="genre" value="action">
+        <label for="action">Action</label>
+      </div>
+      <div>
+        <input type="checkbox" id="thriller" name="genre" value="thriller">
+        <label for="thriller">Thriller</label>
+      </div>
+      <div>
+        <input type="checkbox" id="comedy" name="genre" value="comedy">
+        <label for="comedy">Comedy</label>
+      </div>
+      <div>
+        <input type="checkbox" id="drama" name="genre" value="drama">
+        <label for="drama">Drama</label>
+      </div>
+      <div>
+        <input type="checkbox" id="sci-fi" name="genre" value="sci-fi">
+        <label for="sci-fi">Sci-fi</label>
+      </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+
+
+
+  </body>
+{% endblock %}

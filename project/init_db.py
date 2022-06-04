@@ -8,6 +8,8 @@ conn = psycopg2.connect(
     user=os.environ['DB_USERNAME'],
     password=os.environ['DB_PASSWORD'])
 
+genres = ['action', 'thriller', 'comedy', 'drama', 'sci-fi']
+
 # Open a cursor to perform database operations
 cur = conn.cursor()
 
@@ -28,34 +30,32 @@ cur.execute('INSERT INTO users (username, email, password)'
              generate_password_hash('12345678'))
             )
 
-cur.execute('DROP TABLE IF EXISTS movie;')
+cur.execute('DROP TABLE IF EXISTS movie CASCADE;')
 cur.execute('CREATE TABLE movie (id serial PRIMARY KEY UNIQUE,'
             'title varchar (255) NOT NULL,'
-            'release_date date NOT NULL,'
-            'description varchar (255),'
-            'rating int,'
-            'poster bytea,'
+            'director varchar (255),'
+            'release_year int NOT NULL,'
+            'description varchar (4000),'
+            'rating int NOT NULL,'
+            'poster varchar (255),'
             'user_added varchar (255) NOT NULL);'
             )
 
-cur.execute('DROP TABLE IF EXISTS genre;')
+cur.execute('DROP TABLE IF EXISTS genre CASCADE;')
 cur.execute('CREATE TABLE genre (id serial PRIMARY KEY UNIQUE,'
-            'movie_id int);'
+            'genre varchar (255));'
             )
 
-cur.execute('DROP TABLE IF EXISTS director;')
-cur.execute('CREATE TABLE director (id serial PRIMARY KEY UNIQUE,'
-            'movie_id int);'
-            )
+# cur.execute('INSERT INTO genre (genre) VALUES action', )
 
-cur.execute('DROP TABLE IF EXISTS movie_director;')
-cur.execute('CREATE TABLE movie_director (id int references director(id),'
-            'movie_id int references movie(id));'
-            )
+for i in genres:
+    SQL = "INSERT INTO genre (genre) VALUES (%s);"
+    data = (i, )
+    cur.execute(SQL, data)
 
 cur.execute('DROP TABLE IF EXISTS movie_genre;')
-cur.execute('CREATE TABLE movie_genre (genre_id int references genre(id),'
-            'movie_id int references movie(id));'
+cur.execute('CREATE TABLE movie_genre (genre_id int REFERENCES genre(id),'
+            'movie_id int REFERENCES movie(id));'
             )
 
 
