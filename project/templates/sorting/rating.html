@@ -1,0 +1,46 @@
+{% extends "home.html" %}
+
+{% block sorting %}
+{% endblock %}
+
+{% block pagination %}
+            <!-- Pagination Links-->
+        <div class="text-right">
+                <a href="{{ url_for('views.sorted', page=movies.prev_num, sort_algo='rating') }}"
+                   class="btn btn-outline-dark
+                   {% if movies.page == 1 %}disabled{% endif %}">
+                    &laquo;
+                </a>
+
+            <!-- Loop through the number of pages to display a link for each-->
+            {% for page_num in movies.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+
+                {% if page_num %}
+                    <!-- Check for the active page and set the link to "Active"-->
+                    {% if movies.page == page_num %}
+                    <a href="{{ url_for('views.sorted', page=page_num, sort_algo='rating') }}"
+                       class="btn btn-dark">
+                        {{ page_num }}
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('views.sorted', sort_algo='rating', page=page_num) }}"
+                       class="btn btn-outline-dark">
+                        {{ page_num }}
+                    </a>
+                    {% endif %}
+                {% else %}
+
+                {% endif %}
+                {% endfor %}
+
+            <a href="{{ url_for('views.sorted', sort_algo='rating', page=movies.next_num) }}"
+               class="btn btn-outline-dark
+               {% if movies.page == movies.pages %}disabled{% endif %}">
+                &raquo;
+            </a>
+        </div>
+        <p class="text-right mt-3">
+           Showing page {{ movies.page }} of {{ movies.pages }}
+        </p>
+
+{% endblock %}
