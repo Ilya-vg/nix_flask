@@ -2,33 +2,152 @@
 
 {% block content %}
   <body>
-  <br>
+    <br>
 
-  <table>
-    <thead><tr><th>id</th><th>Title</th><th>Director</th><th>Release Year</th><th>Description</th>
-    <th>Rating</th><th>Genres</th><th>Poster</th><th>Added by User</th></tr></thead>
-    <tbody>
-      {% if list_movies %}
-        {% for movie in list_movies: %}
-          <tr><td>{{ movie[0] }}</td>
-            <td>{{ movie[1] }}</td>
-            <td>{{ movie[2] }}</td>
-            <td>{{ movie[3] }}</td>
-            <td>{{ movie[4] }}</td>
-            <td>{{ movie[5] }}</td>
+        <form method="POST" action="filter">
+            {{ form_genre.csrf_token }}
+            {{ form_genre.genre }}
+            <input type="submit" value="Filter by genre">
+        </form>
+    <br>
 
-            <td>{{ ', '.join(movie[8:]) }}</td>
 
-            <td><a href={{ movie[6] }}>Link</a></td>
-            <td>{{ movie[7] }}</td></tr>
-        {% endfor %}
-      {% else %}
-        <div>No movies in the database yet.</div>
-      {% endif %}
-    </tbody>
-  </table>
+        <form method="POST" action="filter">
+            {{ form_year.csrf_token }}
+            {{ form_year.start_year }}
+            {{ form_year.end_year }}
+            <input type="submit" value="Filter by release year">
+        </form>
+    <br>
 
-  <div>
+        <form method="POST" action="filter">
+            {{ form_dir.csrf_token }}
+            {{ form_dir.director }}
+            <input type="submit" value="Filter by director">
+        </form>
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm text-left">
+                <form method="POST" action="sort">
+                    <label for="sort">Sort by:</label>
+
+                    <select name="sort" id="sort">
+                      <option value="rating">Rating</option>
+                      <option value="year_release">Release year</option>
+                    </select>
+
+                    <input type="checkbox" id="asc" name="asc" >
+                    <label for="asc">Ascending</label>
+
+                    <input type="submit" value="Submit" />
+
+                </form>
+
+            </div>
+
+            <div class="col-sm text-right">
+
+                    <form method="POST" action="search">
+                        {{ form_search.csrf_token }}
+                        {{ form_search.search_query }}
+                        <input type="submit" value="Search">
+                    </form>
+            </div>
+        </div>
+    </div>
+
+{% block table %}
+    <div class="table-responsive table-bordered">
+      <table class="table table-sm table-borderless mb-0">
+          <thead class="thead-dark">
+              <tr>
+                  <th>Index</th>
+                  <th>Title</th>
+                  <th>Director</th>
+                  <th>Release Year</th>
+                  <th>Description</th>
+                  <th>Rating</th>
+                  <th>Genres</th>
+                  <th>Poster</th>
+                  <th>Added by User</th>
+                  <th>Actions</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for movie in movies.items %}
+              <tr>
+                  <th scope="row">{{ loop.index }}</th>
+                  <td>{{ movie.title }}</td>
+                  <td>{{ movie.director }}</td>
+                  <td>{{ movie.year_release }}</td>
+                  <td>{{ movie.description }}</td>
+                  <td>{{ movie.rating }}</td>
+                  <td>{{ genres[movie.id] }}</td>
+                  <td><a href={{ movie.poster }}>Link</a></td>
+                  <td>{{ movie.added_by }}</td>
+                  <td>
+                      <div class="btn-group">
+                          <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <a href="/edit/{{ movie.id }}" class="btn btn-info btn-sm">Edit</a>
+                          </div>
+                        <div class="btn-group mr-2" role="group" aria-label="Second group">
+                            <a href="/delete/{{ movie.id }}" class="btn btn-danger btn-sm">Delete</a>
+                        </div>
+                      </div>
+
+                  </td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+    </div>
+{% endblock %}
+
+{% block pagination %}
+            <!-- Pagination Links-->
+        <div class="text-right">
+                <a href="{{ url_for('views.home', page=movies.prev_num) }}"
+                   class="btn btn-outline-dark
+                   {% if movies.page == 1 %}disabled{% endif %}">
+                    &laquo;
+                </a>
+
+            <!-- Loop through the number of pages to display a link for each-->
+            {% for page_num in movies.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+
+                {% if page_num %}
+                    <!-- Check for the active page and set the link to "Active"-->
+                    {% if movies.page == page_num %}
+                    <a href="{{ url_for('views.home', page=page_num) }}"
+                       class="btn btn-dark">
+                        {{ page_num }}
+                    </a>
+                    {% else %}
+                    <a href="{{ url_for('views.home', page=page_num) }}"
+                       class="btn btn-outline-dark">
+                        {{ page_num }}
+                    </a>
+                    {% endif %}
+
+                {% endif %}
+                {% endfor %}
+
+            <a href="{{ url_for('views.home', page=movies.next_num) }}"
+               class="btn btn-outline-dark
+               {% if movies.page == movies.pages %}disabled{% endif %}">
+                &raquo;
+            </a>
+        </div>
+        <p class="text-right mt-3">
+           Showing page {{ movies.page }} of {{ movies.pages }}
+        </p>
+
+{% endblock %}
+
+
+{% block add_film %}
     <form method="POST">
       <p style="text-align:center"; >Add a new film below</p>
       <div class="form-group">
@@ -63,48 +182,15 @@
                name="description"
                placeholder="Description">
       </div>
-
-      <div class="form-check form-check-inline">
         Rating:
-        <input class="form-check-input" type="radio" name="rating" id="inlineRadio1" value="1">
-        <label class="form-check-label" for="inlineRadio1">1</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="rating" id="inlineRadio2" value="2">
-        <label class="form-check-label" for="inlineRadio2">2</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="rating" id="inlineRadio3" value="3">
-        <label class="form-check-label" for="inlineRadio3">3</label>
-      </div>
-            <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="rating" id="inlineRadio4" value="4">
-        <label class="form-check-label" for="inlineRadio4">4</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="rating" id="inlineRadio5" value="5">
-        <label class="form-check-label" for="inlineRadio5">5</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="rating" id="inlineRadio6" value="6">
-        <label class="form-check-label" for="inlineRadio6">6</label>
-      </div>
-            <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="rating" id="inlineRadio7" value="7">
-        <label class="form-check-label" for="inlineRadio7">7</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="rating" id="inlineRadio8" value="8">
-        <label class="form-check-label" for="inlineRadio8">8</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="rating" id="inlineRadio9" value="9">
-        <label class="form-check-label" for="inlineRadio9">9</label>
-      </div>
-            <div class="form-check form-check-inline">
-        <input class="form-check-input" type="radio" name="rating" id="inlineRadio10" value="10">
-        <label class="form-check-label" for="inlineRadio10">10</label>
-            </div>
+      {% for i in range(1, 11) %}
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio{{ i }}" value={{ i }}>
+            <label class="form-check-label" for="inlineRadio{{ i }}">{{ i }}</label>
+          </div>
+
+      {% endfor %}
+
       <br>
       <br>
       <div class="form-group">
@@ -144,8 +230,7 @@
     </form>
   </div>
 
-
-
+{% endblock %}
 
   </body>
 {% endblock %}

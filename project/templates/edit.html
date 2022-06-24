@@ -1,10 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block content %}
+
+{% block add_film %}
+    <br>
+    <form method="POST" action="/edit/{{ movie.id }}">
+      <p style="text-align:center"; >You can edit a film below</p>
+      <div class="form-group">
+        <label for="title">Film title</label>
+        <input type="text"
+               class="form-control"
+               id="title"
+               name="title"
+               placeholder="Enter film title"
+               value="{{ movie.title }}" >
+      </div>
+      <div>
+        <label for="director">Director</label>
+        <input type="text"
+               class="form-control"
+               id="director"
+               name="director"
+               placeholder="Film Director"
+               value="{{ movie.director }}" >
+      </div>
+      <div class="form-group">
+        <label for="year_release">Release year</label>
+        <input type="text"
+               class="form-control"
+               id="year_release"
+               name="year_release"
+               placeholder="Release year"
+               value="{{ movie.year_release }}">
+      </div>
+      <div class="form-group">
+        <label for="description">Description (optional)</label>
+        <input type="text"
+               class="form-control"
+               id="description"
+               name="description"
+               placeholder="Description"
+               value="{{ movie.description }}" >
+      </div>
+        Rating:
+      {% for i in range(1, 11) %}
+
+        {% if movie.rating == i %}
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio{{ i }}" value={{ i }}>
+            <label class="form-check-label" for="inlineRadio{{ i }}">{{ i }}</label>
+          </div>
+
+        {% else %}
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="rating" id="inlineRadio{{ i }}" value={{ i }} checked>
+            <label class="form-check-label" for="inlineRadio{{ i }}">{{ i }}</label>
+          </div>
+
+        {% endif %}
+
+      {% endfor %}
+
+
+      <br>
+      <br>
+      <div class="form-group">
+        <label for="poster">Poster</label>
+        <input type="url"
+               class="form-control"
+               id="poster"
+               name="poster"
+               placeholder="Link to a poster"
+               value="{{ movie.poster }}" >
+      </div>
+
+    <fieldset>
+      <p>Film genre (one or multiple):</p>
+
+      <div>
+
+        {% if 'action' in m_genres %}
+          <input type="checkbox" id="action" name="genre" value="action" checked>
+        {% else %}
+          <input type="checkbox" id="action" name="genre" value="action">
+        {% endif %}
+        <label for="action">Action</label>
+      </div>
+      <div>
+        {% if 'thriller' in m_genres %}
+          <input type="checkbox" id="thriller" name="genre" value="thriller" checked>
+        {% else %}
+          <input type="checkbox" id="thriller" name="genre" value="thriller">
+        {% endif %}
+        <label for="thriller">Thriller</label>
+      </div>
+      <div>
+        {% if 'comedy' in m_genres %}
+          <input type="checkbox" id="comedy" name="genre" value="comedy" checked>
+        {% else %}
+          <input type="checkbox" id="comedy" name="genre" value="comedy">
+        {% endif %}
+        <label for="comedy">Comedy</label>
+      </div>
+      <div>
+        {% if 'drama' in m_genres %}
+          <input type="checkbox" id="drama" name="genre" value="drama" checked>
+        {% else %}
+          <input type="checkbox" id="drama" name="genre" value="drama">
+        {% endif %}
+        <label for="drama">Drama</label>
+      </div>
+      <div>
+        {% if 'sci-fi' in m_genres %}
+          <input type="checkbox" id="sci-fi" name="genre" value="sci-fi" checked>
+        {% else %}
+          <input type="checkbox" id="sci-fi" name="genre" value="sci-fi">
+        {% endif %}
+        <label for="sci-fi">Sci-fi</label>
+      </div>
+    </fieldset>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+
+{% endblock %}
+
+{% endblock %}
