@@ -11,7 +11,8 @@ class FilmForm(FlaskForm):
     director = StringField('director', validators=[InputRequired()])
     year_released = IntegerField('year_released', validators=[InputRequired()])
     description = StringField('description')
-    rating = RadioField('rating', choices=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'])
+    rating = RadioField('rating',
+                        choices=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], validators=[InputRequired()])
     poster = URLField('poster')
     genre = SelectMultipleField('genre', choices=genres_list)
 

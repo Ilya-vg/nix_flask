@@ -18,7 +18,6 @@ class User(db.Model, UserMixin):
 
 
 class Movie(db.Model):
-    __tablename__ = "movie"
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(30))
@@ -33,7 +32,6 @@ class Movie(db.Model):
 
 
 class Genre(db.Model):
-    __tablename__ = "genre"
 
     id = db.Column(db.Integer, primary_key=True)
     genre = db.Column(db.String(30))
@@ -42,7 +40,6 @@ class Genre(db.Model):
 
 
 class MovieGenre(db.Model):
-    __tablename__ = "movie_genre"
 
     id = db.Column(db.Integer, primary_key=True)
     genre_id = db.Column(db.Integer, ForeignKey('genre.id'))

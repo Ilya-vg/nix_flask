@@ -1,11 +1,11 @@
 from flask import Blueprint, render_template, request, flash, redirect
 from flask_login import login_required, current_user
-from . import get_db_connection, get_genres, db, genres_list
+from . import get_genres, db, genres_list
 import validators
 
-from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import func
 
-from .models import Movie, MovieGenre, Genre
+from .models import Movie, MovieGenre
 from .forms import GenreFilter, YearFilter, DirectorFilter, SearchForm
 
 views = Blueprint('views', __name__)
@@ -25,41 +25,38 @@ def home():
     if request.method == 'POST':
         title = request.form.get('title')
         director = request.form.get('director')
-        release_year = request.form.get('release_year')
+        year_release = request.form.get('year_release')
         description = request.form.get('description')
         rating = request.form.get('rating')
         poster = request.form['poster']
         genre = request.form.getlist('genre')
+        for i in request.form:
+            if not request.form[i] and i != 'description':
+                flash(f'Please fill in a {i} field', category='error')
+
         try:
-            release_year = int(release_year)
+            year_release = int(year_release)
         except ValueError:
             flash('Year of release should be a number, please fill it accordingly.', category='error')
+
         if not validators.url(poster):
             flash('Invalid link to a poster, please check it', category='error')
-        if not description and len(request.form) < 6 \
-                or description and len(request.form) < 7:
-            flash('Please make sure to fill in all fields.', category='error')
         else:
-            conn = get_db_connection()
-            cur = conn.cursor()
-            cur.execute('INSERT INTO movie (title, director, year_release, description,'
-                        'rating, poster, added_by)'
-                        'VALUES (%s, %s, %s, %s, %s, %s, %s);',
-                        (title, director, release_year, description,
-                         rating, poster, current_user.get_username()
-                         ))
-            cur.execute('select MAX(id) FROM movie;')
-            movie_id = cur.fetchall()[0]
-            for g in genre:
-                cur.execute("SELECT id FROM genre WHERE genre = (%s);", (g,))
-                genre_id = cur.fetchall()[0]
-                cur.execute('INSERT INTO movie_genre (genre_id, movie_id)'
-                            'VALUES (%s, %s);',
-                            (genre_id, movie_id))
+            new_film = Movie()
+            new_film.title, new_film.director, new_film.year_release = title, director, year_release
+            new_film.description, new_film.rating = description, rating
+            new_film.poster, new_film.added_by = poster, current_user.get_username()
 
-            conn.commit()
-            cur.close()
-            conn.close()
+            db.session.add(new_film)
+
+            new_film_id = db.session.query(func.max(Movie.id)).scalar()
+
+            for g in genre:
+                add_g = MovieGenre()
+                add_g.movie_id, add_g.genre_id = new_film_id, genres_list.index(g)+1
+                db.session.add(add_g)
+
+            db.session.commit()
 
             flash('New film was added to a database')
 
@@ -89,7 +86,7 @@ def search(search_query):
 
 
 @views.route('/filter', methods=['GET', 'POST'])
-def filtered():
+def filter_f():
     genres = get_genres()
     form_genre, form_year, form_dir = GenreFilter(), YearFilter(), DirectorFilter()
 
@@ -97,8 +94,8 @@ def filtered():
         genres_filter = form_genre.genre.data
         movie_ids = []
         for i, e in enumerate(genres):
-            if genres_filter.lower() in e[0]:
-                movie_ids.append(i + 1)
+            if genres_filter.lower() in genres[e]:
+                movie_ids.append(e)
         movies = db.session.query(Movie).filter(Movie.id.in_(movie_ids)).all()
 
     elif form_dir.validate_on_submit():
@@ -156,7 +153,11 @@ def sorted_films(sort_algo):
 
 @views.route('/delete/<movie_id>', methods=['GET'])
 def delete(movie_id):
-    username = current_user.username
+    try:
+        username = current_user.username
+    except AttributeError:
+        flash('Please log in to be able to delete films', category='error')
+        return redirect('/')
 
     if username == Movie.query.with_entities(Movie.added_by).filter_by(id=movie_id).all()[0][0]:
         MovieGenre.query.filter_by(movie_id=movie_id).delete()
@@ -170,6 +171,7 @@ def delete(movie_id):
 
 
 @views.route('/edit/<movie_id>', methods=['GET', 'POST'])
+@login_required
 def edit(movie_id):
     movie = Movie.query.filter_by(id=movie_id).first()
     m_genres = get_genres()[movie.id]
@@ -189,18 +191,18 @@ def edit(movie_id):
             request.form.get('title'), request.form.get('director'), \
             request.form.get('year_release'), request.form.get('description'), \
             request.form.get('rating'), request.form['poster'], request.form.getlist('genre')
-        print('YEAR OF RELEASE :::::::::::', year_release)
-        print('&&&&&&&&&&&&&&&', not description)
-        print('&&&&&&&&&&&&&&&', not description, len(form))
+        for i in request.form:
+            if not request.form[i] and i != 'description':
+                flash(f'Please fill in a {i} field', category='error')
+                return redirect(f'/edit/{movie_id}')
         try:
             year_release = int(year_release)
         except ValueError:
             flash('Year of release should be a number, please fill it accordingly.', category='error')
+            redirect(f'/edit/{movie_id}')
         if not validators.url(poster):
             flash('Invalid link to a poster, please check it', category='error')
-        elif description and len(request.form) < 6 \
-                or not description and len(request.form) < 7:
-            flash('Please make sure to fill in all fields.', category='error')
+
         else:
             Movie.query.filter_by(id=movie_id).update({'title': f'{title}',
                                                        'director': f'{director}',
@@ -211,9 +213,9 @@ def edit(movie_id):
             MovieGenre.query.filter_by(movie_id=movie_id).delete()
 
             for g in genre:
-                add = MovieGenre()
-                add.movie_id, add.genre_id = movie_id, genres_list.index(g)+1
-                db.session.add(add)
+                add_g = MovieGenre()
+                add_g.movie_id, add_g.genre_id = movie_id, genres_list.index(g)+1
+                db.session.add(add_g)
 
             db.session.commit()
 
