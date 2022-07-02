@@ -31,7 +31,7 @@
                   <td>{{ movie.year_release }}</td>
                   <td>{{ movie.description }}</td>
                   <td>{{ movie.rating }}</td>
-                  <td>{{ ', '.join(genres[movie.id-1][0])}}</td>
+                  <td>{{ genres[movie.id] }}</td>
                   <td><a href={{ movie.poster }}>Link</a></td>
                   <td>{{ movie.added_by }}</td>
               </tr>

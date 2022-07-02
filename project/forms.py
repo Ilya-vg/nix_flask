@@ -1,27 +1,39 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField,\
-    RadioField, URLField, SelectMultipleField, SelectField
-from wtforms.validators import InputRequired
+from wtforms import StringField, IntegerField, \
+    RadioField, URLField, SelectField, PasswordField, EmailField
+from wtforms.validators import InputRequired, Length, EqualTo
 
-from . import genres_list
+
+class SignupForm(FlaskForm):
+    username = StringField('Username', validators=[InputRequired(), Length(min=2, max=25)])
+    email = EmailField('Email', validators=[InputRequired()])
+    password1 = PasswordField('Password',
+                              validators=[InputRequired(), Length(min=7, max=35),
+                                          EqualTo('password2', message='Passwords must match')])
+    password2 = PasswordField('Confirm password', validators=[InputRequired()])
+
+
+class LoginForm(FlaskForm):
+    username = StringField('Username')
+    password = PasswordField('Password', validators=[InputRequired(), Length(min=7, max=35)])
 
 
 class FilmForm(FlaskForm):
-    title = StringField('title', validators=[InputRequired()])
-    director = StringField('director', validators=[InputRequired()])
-    year_released = IntegerField('year_released', validators=[InputRequired()])
-    description = StringField('description')
-    rating = RadioField('rating',
-                        choices=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'], validators=[InputRequired()])
-    poster = URLField('poster')
-    genre = SelectMultipleField('genre', choices=genres_list)
+    title = StringField('Title', validators=[InputRequired()])
+    director = StringField('Director', validators=[InputRequired()])
+    year_release = IntegerField('Year of release', validators=[InputRequired()])
+    description = StringField('Description', validators=[Length(min=12, max=250)])
+    rating = RadioField('Rating',
+                        choices=['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+                        validators=[InputRequired()])
+    poster = URLField('Poster')
 
 
 class GenreFilter(FlaskForm):
     genre = SelectField('genre', choices=['Action', 'Thriller', 'Comedy', 'Drama', 'Sci-Fi'])
 
 
-choices = [i for i in range(1888, 2022)]
+choices = list(range(1888, 2022))
 
 
 class YearFilter(FlaskForm):

@@ -1,6 +1,5 @@
 import os
 import psycopg2
-from werkzeug.security import generate_password_hash
 
 conn = psycopg2.connect(
     host="localhost",
@@ -79,4 +78,3 @@ conn.commit()
 
 cur.close()
 conn.close()
-

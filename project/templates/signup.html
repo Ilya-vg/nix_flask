@@ -2,48 +2,11 @@
 content %}
 <form method="POST">
   <h3 align="center">Sign Up</h3>
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input
-      type="text"
-      class="form-control"
-      id="username"
-      name="username"
-      placeholder="Enter your user name"
-    />
-  </div>
-  <div class="form-group">
-    <label for="email">Email Address</label>
-    <input
-      type="email"
-      class="form-control"
-      id="email"
-      name="email"
-      placeholder="Enter email"
-    />
-  </div>
-
-  <div class="form-group">
-    <label for="password1">Password</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password1"
-      name="password1"
-      placeholder="Enter password"
-    />
-  </div>
-  <div class="form-group">
-    <label for="password2">Password (Confirm)</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password2"
-      name="password2"
-      placeholder="Confirm password"
-    />
-  </div>
-  <br />
+  <div>{{ form.username.label }}: {{ form.username(class="form-control") }}</div>
+  <div>{{ form.email.label }}: {{ form.email(class="form-control") }}</div>
+  <div>{{ form.password1.label }}: {{ form.password1(class="form-control") }}</div>
+  <div>{{ form.password2.label }}: {{ form.password2(class="form-control") }}</div>
+  <br/>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 {% endblock %}

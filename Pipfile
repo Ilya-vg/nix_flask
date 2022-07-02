@@ -13,6 +13,10 @@ jinja2 = "*"
 flask-wtf = "*"
 flask-bootstrap = "*"
 validators = "*"
+pytest = "*"
+wtforms = "*"
+prospector = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 

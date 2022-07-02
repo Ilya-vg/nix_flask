@@ -1,5 +1,5 @@
-import psycopg2
 import os
+import psycopg2
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -21,7 +21,7 @@ def create_app():
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/')
 
-    from .models import User, Movie, Genre, MovieGenre
+    from .models import User
 
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
@@ -52,13 +52,13 @@ def get_genres():
     cur.execute('SELECT array_agg (genre), movie.id FROM movie '
                 'INNER JOIN movie_genre on movie.id = movie_id '
                 'INNER JOIN genre ON genre.id = movie_genre.genre_id '
-                f'GROUP BY movie.id '
-                f'ORDER BY movie.id;')
+                'GROUP BY movie.id '
+                'ORDER BY movie.id;')
 
     genres_l = cur.fetchall()
 
     genres = {}
-    # print(genres_l)
+
     for g in genres_l:
         genres[g[1]] = ', '.join(g[0])
 
