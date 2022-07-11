@@ -8,6 +8,8 @@ from .forms import SignupForm, LoginForm
 
 auth = Blueprint('auth', __name__)
 
+from main import app
+
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -22,13 +24,17 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
+                app.logger.info(f'User {user.username} logged in successfully.')
                 return redirect(url_for('views.home'))
 
             flash('Incorrect password, try again.', category='error')
+            app.logger.info('Failed login attempt: invalid password')
         else:
             flash('User with this name does not exist.', category='error')
+            app.logger.info('Failed login attempt: invalid username')
 
         return redirect(url_for('auth.login', user=current_user))
+
     return render_template('login.html', user=current_user, form=form)
 
 
@@ -36,12 +42,14 @@ def login():
 @login_required
 def logout():
     logout_user()
+    app.logger.info('User was logged out successfully.')
     return redirect(url_for('views.home'))
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
 def sign_up():
     form = SignupForm()
+
     if request.method == 'POST' and form.validate:
 
         username = form.username.data
@@ -49,7 +57,7 @@ def sign_up():
         password = form.password1.data
 
         by_email = User.query.filter_by(email=email).all()
-        by_name = User.query.filter_by(username=form.username.data).all()
+        by_name = User.query.filter_by(username=username).all()
 
         if by_email:
             flash('User with this email already exists.', category='error')
@@ -63,6 +71,8 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         flash('You may log in with provided credentials.')
+
+        app.logger.info(f'A new user with username {user.username} was created.')
 
         return redirect(url_for('auth.login'))
 

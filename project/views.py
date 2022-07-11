@@ -2,25 +2,25 @@ from flask import Blueprint, render_template, request, flash, redirect
 from flask_login import login_required, current_user
 from sqlalchemy import func
 
-from . import get_genres, db, genres_list
-from .models import Movie, MovieGenre
-from .forms import GenreFilter, YearFilter, DirectorFilter, SearchForm, FilmForm
+from . import db, genres_list
+from .models import Movie, MovieGenre, Genre
+from .forms import GenreFilter, YearFilter, DirectorFilter, SearchForm, FilmForm, SortForm
 
 views = Blueprint('views', __name__)
 
-genres: dict = get_genres()
+from main import app
 
 
 @views.route('/', methods=['GET', 'POST'])
 def home():
     movies = Movie.query.paginate(per_page=2, error_out=False)
-
     form = FilmForm()
 
     form_genre = GenreFilter()
     form_year = YearFilter()
     form_dir = DirectorFilter()
     form_search = SearchForm()
+    sort_form = SortForm()
 
     # adding new film to a database
     if request.method == 'POST':
@@ -49,17 +49,21 @@ def home():
 
             db.session.commit()
 
+            app.logger.info(f'A film {title} was added to a database.')
             flash('New film was added to a database')
 
     return render_template('home.html', user=current_user, movies=movies,
-                           genres=genres, form=form, form_genre=form_genre,
-                           form_year=form_year, form_dir=form_dir, form_search=form_search)
+                           form=form, form_genre=form_genre,
+                           form_year=form_year, form_dir=form_dir,
+                           form_search=form_search, sort_form=sort_form)
 
 
 @views.route('/search', methods=['POST'])
 def search_redirect():
     form_search = SearchForm()
     query = form_search.search_query.data
+
+    app.logger.info(f'Search request for: {query}')
 
     return redirect(f'search/{query}')
 
@@ -68,49 +72,45 @@ def search_redirect():
 def search(search_query):
     movies = Movie.query.filter(Movie.title.ilike(f'%{search_query}%')).paginate(per_page=1, error_out=False)
 
-    return render_template('search.html', user=current_user, movies=movies,
-                           genres=genres, search_query=search_query)
+    return render_template('search.html', user=current_user,
+                           movies=movies, search_query=search_query)
 
 
 @views.route('/filter', methods=['POST'])
 def filter_f():
     form_genre, form_year, form_dir = GenreFilter(), YearFilter(), DirectorFilter()
 
-    if form_genre.validate_on_submit():
-        genres_filter = form_genre.genre.data
-        movie_ids = []
-        for _, e in enumerate(genres):
-            if genres_filter.lower() in genres[e]:
-                movie_ids.append(e)
-        movies = db.session.query(Movie).filter(Movie.id.in_(movie_ids)).all()
+    if form_genre.submit1.data:
+        genre_id = Genre.query.filter_by(genre=form_genre.genre.data.lower()) \
+            .with_entities(Genre.id).first()[0]
+        ids = MovieGenre.query.filter_by(genre_id=genre_id).with_entities(MovieGenre.movie_id).all()
 
-    elif form_dir.validate_on_submit():
-        movies = db.session.query(Movie).filter(Movie.director.ilike(f'%{form_dir.director.data}%')).all()
+        ids = [m_id[0] for m_id in ids]
+        movies = db.session.query(Movie).filter(Movie.id.in_(ids)).all()
 
-    elif form_year.validate_on_submit():
+    elif form_year.submit2.data:
         movies = db.session.query(Movie).filter(Movie.year_release >= form_year.start_year.data,
                                                 Movie.year_release <= form_year.end_year.data).all()
 
-    if 'movies' not in locals():
-        flash('Please choose how to filter films', category='error')
-        return home()
+    else:
+        movies = db.session.query(Movie).filter(Movie.director.ilike(f'%{form_dir.director.data}%')).all()
 
     return render_template('filtered.html', user=current_user, movies=movies,
-                           genres=genres, form_genre=form_genre, form_year=form_year, form_dir=form_dir)
+                           form_genre=form_genre, form_year=form_year, form_dir=form_dir)
 
 
 @views.route('/sort', methods=['POST'])
 def sort():
-    form = request.form
+    form = SortForm()
 
-    if form.get('sort') == 'rating':
-        if form.get('asc'):
+    if form.algo.data == 'rating':
+        if form.asc.data:
             sort_algo = 'rating_asc'
         else:
             sort_algo = 'rating'
 
     else:
-        if form.get('asc'):
+        if form.asc.data:
             sort_algo = 'year_asc'
         else:
             sort_algo = 'year'
@@ -132,7 +132,7 @@ def sorted_films(sort_algo):
     else:
         movies = Movie.query.order_by(Movie.year_release).paginate(per_page=2)
 
-    return render_template(f'sorting/{sort_algo}.html', user=current_user, movies=movies, genres=genres)
+    return render_template(f'sorting/{sort_algo}.html', user=current_user, movies=movies)
 
 
 @views.route('/delete/<movie_id>', methods=['GET'])
@@ -143,10 +143,14 @@ def delete(movie_id):
         flash('Please log in to be able to delete films', category='error')
         return redirect('/')
 
-    if username == Movie.query.with_entities(Movie.added_by).filter_by(id=movie_id).all()[0][0]:
+    added_by = Movie.query.with_entities(Movie.added_by).filter_by(id=movie_id).all()[0][0]
+
+    if username == added_by:
         MovieGenre.query.filter_by(movie_id=movie_id).delete()
         Movie.query.filter_by(id=movie_id).delete()
         db.session.commit()
+
+        app.logger.info(f'A film was deleted from a database.')
 
     else:
         flash('You can only delete/edit a record if you were the user that added it.', category='error')
@@ -158,14 +162,14 @@ def delete(movie_id):
 @login_required
 def edit(movie_id):
     movie = Movie.query.filter_by(id=movie_id).first()
-    m_genres: list = genres[movie.id].split(', ')
     form = FilmForm()
+    movie_genres = [str(i) for i in movie.genres]
 
     if request.method == 'GET':
 
         if current_user.username == movie.added_by:
             return render_template('edit.html', user=current_user, movie=movie,
-                                   m_genres=m_genres, form=form)
+                                   form=form, movie_genres=movie_genres)
 
         flash('Only user that added a film in the database can edit a film record.', category='error')
         return redirect('/')
@@ -187,10 +191,12 @@ def edit(movie_id):
     MovieGenre.query.filter_by(movie_id=movie_id).delete()
 
     for g in genre:
-        add_g = MovieGenre(genres_list.index(g)+1, movie_id)
+        add_g = MovieGenre(genres_list.index(g) + 1, movie_id)
         db.session.add(add_g)
 
     db.session.commit()
     flash('Film was edited successfully', category='success')
+
+    app.logger.info(f'A film {title} was edited successfully.')
 
     return redirect('/')

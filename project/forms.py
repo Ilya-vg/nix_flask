@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, \
-    RadioField, URLField, SelectField, PasswordField, EmailField
+    RadioField, URLField, SelectField, PasswordField, EmailField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, EqualTo
 
 
@@ -31,18 +31,28 @@ class FilmForm(FlaskForm):
 
 class GenreFilter(FlaskForm):
     genre = SelectField('genre', choices=['Action', 'Thriller', 'Comedy', 'Drama', 'Sci-Fi'])
+    submit1 = SubmitField('Filter by genre')
 
 
-choices = list(range(1888, 2022))
+choices = list(range(1919, 2023))
 
 
 class YearFilter(FlaskForm):
-    start_year = SelectField('Start year', choices=choices)
-    end_year = SelectField('End year', choices=choices)
+    start_year = SelectField('Start year', choices=choices, default=1970)
+    end_year = SelectField('End year', choices=choices, default=2022)
+    submit2 = SubmitField('Filter by release year')
 
 
 class DirectorFilter(FlaskForm):
     director = StringField('director', validators=[InputRequired()])
+    submit3 = SubmitField('Filter by director')
+
+
+class SortForm(FlaskForm):
+    algo = SelectField('Sort by:', choices=[('rating', 'Rating'),
+                                            ('year', 'Year of release')], default='Rating')
+    asc = BooleanField('Ascending')
+    sort_submit = SubmitField('Submit')
 
 
 class SearchForm(FlaskForm):

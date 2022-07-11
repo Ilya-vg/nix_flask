@@ -17,6 +17,7 @@ pytest = "*"
 wtforms = "*"
 prospector = "*"
 sqlalchemy = "*"
+coverage = "*"
 
 [dev-packages]
 

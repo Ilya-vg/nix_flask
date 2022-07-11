@@ -7,7 +7,7 @@
         <form method="POST" action="filter">
             {{ form_genre.csrf_token }}
             {{ form_genre.genre }}
-            <input type="submit" value="Filter by genre">
+            {{ form_genre.submit1 }}
         </form>
     <br>
 
@@ -16,34 +16,26 @@
             {{ form_year.csrf_token }}
             {{ form_year.start_year }}
             {{ form_year.end_year }}
-            <input type="submit" value="Filter by release year">
+            {{ form_year.submit2 }}
         </form>
     <br>
 
         <form method="POST" action="filter">
             {{ form_dir.csrf_token }}
             {{ form_dir.director }}
-            <input type="submit" value="Filter by director">
+            {{ form_dir.submit3 }}
         </form>
     <br>
 
     <div class="container">
         <div class="row">
             <div class="col-sm text-left">
-                <form method="POST" action="sort">
-                    <label for="sort">Sort by:</label>
-
-                    <select name="sort" id="sort">
-                      <option value="rating">Rating</option>
-                      <option value="year_release">Release year</option>
-                    </select>
-
-                    <input type="checkbox" id="asc" name="asc" >
-                    <label for="asc">Ascending</label>
-
-                    <input type="submit" value="Submit" />
-
-                </form>
+                    <form method="POST" action="sort">
+                        {{ sort_form.csrf_token }}
+                        {{ sort_form.algo.label }} {{ sort_form.algo }}
+                        {{ sort_form.asc.label }} {{ sort_form.asc }}
+                        {{ sort_form.sort_submit }}
+                    </form>
 
             </div>
 
@@ -84,7 +76,7 @@
                   <td>{{ movie.year_release }}</td>
                   <td>{{ movie.description }}</td>
                   <td>{{ movie.rating }}</td>
-                  <td>{{ genres[movie.id] }}</td>
+                  <td>{{ movie.genres|join(', ') }}</td>
                   <td><a href={{ movie.poster }}>Link</a></td>
                   <td>{{ movie.added_by }}</td>
                   <td>

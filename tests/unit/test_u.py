@@ -1,6 +1,6 @@
 from werkzeug.security import check_password_hash
-from project.models import Genre, MovieGenre
-from project import genres_list
+from project.models import MovieGenre, Movie
+from project import create_app, db, genres_list
 
 
 def test_new_user(new_user):
@@ -12,11 +12,10 @@ def test_new_user(new_user):
     assert new_user.username == 'test1'
     assert new_user.email == 'mockemail@gmail.com'
     assert check_password_hash(new_user.password, '12345')
-    assert new_user.__repr__() == f'<User: test1, email: mockemail@gmail.com'
+    assert new_user.__repr__() == f'<User: test1, email: mockemail@gmail.com>'
     assert new_user.is_authenticated
     assert new_user.is_active
     assert not new_user.is_anonymous
-
 
 
 def test_new_film(new_film):
@@ -38,5 +37,24 @@ def test_new_film(new_film):
         assert m_g.movie_id == new_film.id
 
 
-def test_delete():
-    pass
+def test_delete_film(test_client):
+    """
+    WHEN this movie in the database:
+    INSERT INTO movie (title, director, year_release, description, rating, poster, added_by)
+    VALUES ('test title', 'mr. director', 1999, 'hey it is description', 8,
+    'https://en.wikipedia.org/wiki/Film#/media/File:Le_Voyage_dans_la_lune.jpg', 'admin');
+
+    THEN check if it can be deleted
+    """
+    app = create_app()
+    with app.app_context():
+        film = Movie.query.filter_by(title='test title').first()
+        if film:
+            db.session.delete(film)
+            db.session.commit()
+
+    assert not Movie.query.filter_by(title='test title').first()
+
+
+def test_get_username(new_user):
+    assert new_user.get_username() == 'test1'

@@ -2,7 +2,7 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 
-from . import db
+from . import db, genres_list
 
 
 class User(db.Model, UserMixin):
@@ -19,7 +19,7 @@ class User(db.Model, UserMixin):
         self.password = password
 
     def __repr__(self):
-        return f'<User: {self.username}, email: {self.email}'
+        return f'<User: {self.username}, email: {self.email}>'
 
     def get_username(self):
         return self.username
@@ -36,7 +36,7 @@ class Movie(db.Model):
     poster = db.Column(db.String(100))
     added_by = db.Column(db.String(150))
 
-    children = relationship("MovieGenre", cascade="all,delete", backref="movie")
+    genres = relationship("MovieGenre", cascade="all,delete", backref="movie")
 
     def __init__(self, title, director, year_release,
                  description, rating, poster, added_by):
@@ -66,3 +66,6 @@ class MovieGenre(db.Model):
     def __init__(self, genre_id, movie_id):
         self.genre_id = genre_id
         self.movie_id = movie_id
+
+    def __repr__(self):
+        return f'{genres_list[self.genre_id-1]}'

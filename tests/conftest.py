@@ -16,9 +16,17 @@ def test_client():
 
 
 @pytest.fixture()
+def new_user_form():
+    data = {'username': 'userpytest',
+            'email': 'uniqueemail@gmail.com',
+            'password1': '1234567'}
+    return data
+
+
+@pytest.fixture()
 def new_user():
     user = User(username='test1', email='mockemail@gmail.com',
-                password=generate_password_hash('12345', method='sha256'))
+                password=generate_password_hash('12345'))
     return user
 
 
@@ -42,5 +50,3 @@ def new_film(new_film_form):
                  poster=new_film_form['poster'],
                  added_by='admin')
     return film
-
-

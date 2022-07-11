@@ -1,11 +1,15 @@
-import os
-import psycopg2
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+import logging
 
 db = SQLAlchemy()
 DB_NAME = "flask_films"
+
+genres_list = ['action', 'thriller', 'comedy', 'drama', 'sci-fi']
+
+logging.basicConfig(filename='record.log', level=logging.DEBUG,
+                    format=f'%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 
 def create_app():
@@ -35,38 +39,3 @@ def create_app():
         return User.query.get(int(u_id))
 
     return app
-
-
-def get_db_connection():
-    conn = psycopg2.connect(host='localhost',
-                            database='flask_films',
-                            user=os.environ['DB_USERNAME'],
-                            password=os.environ['DB_PASSWORD'])
-    return conn
-
-
-def get_genres():
-    conn = get_db_connection()
-    cur = conn.cursor()
-
-    cur.execute('SELECT array_agg (genre), movie.id FROM movie '
-                'INNER JOIN movie_genre on movie.id = movie_id '
-                'INNER JOIN genre ON genre.id = movie_genre.genre_id '
-                'GROUP BY movie.id '
-                'ORDER BY movie.id;')
-
-    genres_l = cur.fetchall()
-
-    genres = {}
-
-    for g in genres_l:
-        genres[g[1]] = ', '.join(g[0])
-
-    conn.commit()
-    cur.close()
-    conn.close()
-
-    return genres
-
-
-genres_list = ['action', 'thriller', 'comedy', 'drama', 'sci-fi']
