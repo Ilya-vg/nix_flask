@@ -1,17 +1,15 @@
 import pytest
 from werkzeug.security import generate_password_hash
-from project import create_app
+from project import app
 from project.models import User, Movie
 
 
 @pytest.fixture()
 def test_client():
-    flask_app = create_app()
-
     # Create a test client using the Flask application configured for testing
-    with flask_app.test_client() as testing_client:
+    with app.test_client() as testing_client:
         # Establish an application context
-        with flask_app.app_context():
+        with app.app_context():
             yield testing_client  # this is where the testing happens!
 
 
@@ -24,10 +22,34 @@ def new_user_form():
 
 
 @pytest.fixture()
+def new_api_user_data():
+    data = {'username': 'api_test_user',
+            'email': 'apitestuser@mail.com',
+            'password': '1234567'}
+    return data
+
+
+@pytest.fixture()
 def new_user():
     user = User(username='test1', email='mockemail@gmail.com',
                 password=generate_password_hash('12345'))
     return user
+
+
+@pytest.fixture()
+def user_email_exists():
+    data = {'username': 'new_user444',
+            'email': 'ilyagvv@gmail.com',
+            'password': '1234567'}
+    return data
+
+
+@pytest.fixture()
+def user_name_exists():
+    data = {'username': 'admin',
+            'email': 'newmail@gmail.com',
+            'password': '1234567'}
+    return data
 
 
 @pytest.fixture()

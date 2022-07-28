@@ -1,6 +1,6 @@
 from werkzeug.security import check_password_hash
 from project.models import MovieGenre, Movie
-from project import create_app, db, genres_list
+from project import app, db, genres_list
 
 
 def test_new_user(new_user):
@@ -46,7 +46,7 @@ def test_delete_film(test_client):
 
     THEN check if it can be deleted
     """
-    app = create_app()
+
     with app.app_context():
         film = Movie.query.filter_by(title='test title').first()
         if film:

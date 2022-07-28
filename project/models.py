@@ -1,6 +1,6 @@
+from flask_login import UserMixin
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import relationship
-from flask_login import UserMixin
 
 from . import db, genres_list
 
@@ -26,7 +26,6 @@ class User(db.Model, UserMixin):
 
 
 class Movie(db.Model):
-
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(30))
     director = db.Column(db.String(30))
@@ -48,9 +47,13 @@ class Movie(db.Model):
         self.poster = poster
         self.added_by = added_by
 
+    def as_dict(self):
+        dct = {c.name: getattr(self, c.name) for c in self.__table__.columns}
+        dct['genres'] = list(map(str, self.genres))
+        return dct
+
 
 class Genre(db.Model):
-
     id = db.Column(db.Integer, primary_key=True)
     genre = db.Column(db.String(30))
 
@@ -58,7 +61,6 @@ class Genre(db.Model):
 
 
 class MovieGenre(db.Model):
-
     id = db.Column(db.Integer, primary_key=True)
     genre_id = db.Column(db.Integer, ForeignKey('genre.id'))
     movie_id = db.Column(db.Integer, ForeignKey('movie.id', ondelete="CASCADE"))
@@ -68,4 +70,4 @@ class MovieGenre(db.Model):
         self.movie_id = movie_id
 
     def __repr__(self):
-        return f'{genres_list[self.genre_id-1]}'
+        return f'{genres_list[self.genre_id - 1]}'

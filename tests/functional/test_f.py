@@ -1,6 +1,6 @@
 from flask_login import FlaskLoginClient
 
-from project import db, create_app
+from project import db, app
 from project.models import User, Movie
 
 
@@ -33,18 +33,11 @@ class TestClassHome:
         THEN response is valid and the film is created
         """
 
-        app = create_app()
         app.test_client_class = FlaskLoginClient
 
         user = User.query.filter_by(username='admin').first()
         with app.test_client(user=user) as client:
-            response = client.post('/', data={'title': 'Test film 1',
-                                              'director': 'Test director 1',
-                                              'year_release': '2000', 'description': 'Test description 1',
-                                              'rating': 10,
-                                              'poster': 'https://www.amazon.com/Movie-Poster-Marvel-Holographic'
-                                                        '-Authenticity/dp/B07Q1YWKD9',
-                                              'genre': ["action", "thriller"]})
+            response = client.post('/', data=new_film_form)
 
         film = Movie.query.filter_by(title='Test film 1').first()
 
@@ -81,7 +74,7 @@ class TestClassSearch:
         THEN all films with titles matching the search query are found
         """
         response = test_client.get('/search/mad')
-        print(response.data)
+
         assert response.status_code == 200
         assert b'Added by User' and b'Mad Max' in response.data
         assert b'Search' in response.data
@@ -93,10 +86,7 @@ class TestClassFilter:
         WHEN the '/filter' page is requested (POST)
         THEN the response filters films according to the request
         """
-        app = create_app()
-
-        with app.test_client() as client:
-            response = client.post('/filter', data={'genre': 'Comedy', 'submit1': True})
+        response = test_client.post('/filter', data={'genre': 'Comedy', 'submit1': True})
 
         assert response.status_code == 200
         assert b'Added by User' and b'Home Alone' in response.data
@@ -132,6 +122,7 @@ class TestClassSort:
         THEN this page redirects to a list of films sorted correctly
         """
         response = test_client.post('/sort', data={'algo': 'rating', 'asc': '', 'sort_submit': True})
+
         assert response.status_code == 302
         assert b'<a href="/sorted_films/rating">' in response.data
 
@@ -273,16 +264,15 @@ class TestClassSignUp:
     def test_signup_post(self, test_client, new_user_form):
         """
         WHEN a post request on /signup is sent with new valid user data
-        THEN user is  redirected to login page
+        THEN user is redirected to login page
         """
         response = test_client.post('/signup', data=new_user_form)
+        user = User.query.filter_by(username=new_user_form['username']).first()
 
-        assert User.query.filter_by(username='userpytest')
+        assert user
 
         # this part deletes created user
-        app = create_app()
         with app.app_context():
-            user = User.query.filter_by(username=new_user_form['username']).first()
             if user:
                 db.session.delete(user)
                 db.session.commit()
@@ -291,14 +281,12 @@ class TestClassSignUp:
         assert response.status_code == 302
         assert b'/login' in response.data
 
-    def test_signup_post_existing_email(self, test_client):
+    def test_signup_post_existing_email(self, test_client, user_email_exists):
         """
         WHEN a post request on /signup is sent with existing email
         THEN the redirect back to sign in page
         """
-        response = test_client.post('/signup', data={'username': 'new_user444',
-                                                     'email': 'ilyagvv@gmail.com',
-                                                     'password': '1234567'})
+        response = test_client.post('/signup', data=user_email_exists)
 
         assert response.status_code == 302
         assert b' <a href="/signup">/signup</a>' in response.data
@@ -322,7 +310,6 @@ class TestClassEdit:
         WHEN valid user tries to edit film
         THEN film is edited successfully
         """
-        app = create_app()
         app.test_client_class = FlaskLoginClient
 
         user = User.query.filter_by(username='admin').first()
@@ -342,7 +329,6 @@ class TestClassEdit:
         WHEN invalid user tries to edit film (invalid means the one that didn't add the film to a database)
         THEN user is redirected to home
         """
-        app = create_app()
         app.test_client_class = FlaskLoginClient
 
         user = User.query.filter_by(username='user1').first()
@@ -358,7 +344,6 @@ class TestClassEdit:
         WHEN valid user tries to edit film (valid = the one that added a film or admin)
         THEN user is redirected to /edit page
         """
-        app = create_app()
         app.test_client_class = FlaskLoginClient
 
         user = User.query.filter_by(username='admin').first()
@@ -375,7 +360,6 @@ class TestClassDelete:
         WHEN valid user tries to delete a film (valid = the one that added a film or admin)
         THEN film is deleted
         """
-        app = create_app()
         app.test_client_class = FlaskLoginClient
 
         user = User.query.filter_by(username='admin').first()
@@ -390,7 +374,6 @@ class TestClassDelete:
         WHEN invalid user tries to edit film
         THEN film is not deleted
         """
-        app = create_app()
         app.test_client_class = FlaskLoginClient
 
         user = User.query.filter_by(username='user1').first()

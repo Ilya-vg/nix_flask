@@ -6,9 +6,9 @@ from . import db
 from .models import User
 from .forms import SignupForm, LoginForm
 
-auth = Blueprint('auth', __name__)
+import main
 
-from main import app
+auth = Blueprint('auth', __name__)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -24,14 +24,14 @@ def login():
             if check_password_hash(user.password, password):
                 flash('Logged in successfully!', category='success')
                 login_user(user, remember=True)
-                app.logger.info(f'User {user.username} logged in successfully.')
+                main.app.logger.info(f'User {user.username} logged in successfully.')
                 return redirect(url_for('views.home'))
 
             flash('Incorrect password, try again.', category='error')
-            app.logger.info('Failed login attempt: invalid password')
+            main.app.logger.info('Failed login attempt: invalid password')
         else:
             flash('User with this name does not exist.', category='error')
-            app.logger.info('Failed login attempt: invalid username')
+            main.app.logger.info('Failed login attempt: invalid username')
 
         return redirect(url_for('auth.login', user=current_user))
 
@@ -42,7 +42,7 @@ def login():
 @login_required
 def logout():
     logout_user()
-    app.logger.info('User was logged out successfully.')
+    main.app.logger.info('User was logged out successfully.')
     return redirect(url_for('views.home'))
 
 
@@ -72,7 +72,7 @@ def sign_up():
         db.session.commit()
         flash('You may log in with provided credentials.')
 
-        app.logger.info(f'A new user with username {user.username} was created.')
+        main.app.logger.info(f'A new user with username {user.username} was created.')
 
         return redirect(url_for('auth.login'))
 

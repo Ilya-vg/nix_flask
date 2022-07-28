@@ -8,7 +8,7 @@ from .forms import GenreFilter, YearFilter, DirectorFilter, SearchForm, FilmForm
 
 views = Blueprint('views', __name__)
 
-from main import app
+import main
 
 
 @views.route('/', methods=['GET', 'POST'])
@@ -49,7 +49,7 @@ def home():
 
             db.session.commit()
 
-            app.logger.info(f'A film {title} was added to a database.')
+            main.app.logger.info(f'A film {title} was added to a database.')
             flash('New film was added to a database')
 
     return render_template('home.html', user=current_user, movies=movies,
@@ -63,7 +63,7 @@ def search_redirect():
     form_search = SearchForm()
     query = form_search.search_query.data
 
-    app.logger.info(f'Search request for: {query}')
+    main.app.logger.info(f'Search request for: {query}')
 
     return redirect(f'search/{query}')
 
@@ -150,7 +150,7 @@ def delete(movie_id):
         Movie.query.filter_by(id=movie_id).delete()
         db.session.commit()
 
-        app.logger.info(f'A film was deleted from a database.')
+        main.app.logger.info('A film was deleted from a database.')
 
     else:
         flash('You can only delete/edit a record if you were the user that added it.', category='error')
@@ -197,6 +197,6 @@ def edit(movie_id):
     db.session.commit()
     flash('Film was edited successfully', category='success')
 
-    app.logger.info(f'A film {title} was edited successfully.')
+    main.app.logger.info(f'A film {title} was edited successfully.')
 
     return redirect('/')

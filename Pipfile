@@ -18,6 +18,8 @@ wtforms = "*"
 prospector = "*"
 sqlalchemy = "*"
 coverage = "*"
+flask-restx = "*"
+flask-jwt-extended = "*"
 
 [dev-packages]
 
