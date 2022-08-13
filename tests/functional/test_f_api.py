@@ -74,6 +74,9 @@ class TestAuth:
 
 
 class TestFilm:
+    """
+    test CRUD functionality of API
+    """
     def test_get(self, test_client):
         response = test_client.get('/api/films/1')
 
@@ -132,6 +135,7 @@ class TestFilm:
 
         assert not Movie.query.filter_by(title=new_film_form['title']).first()
 
+        # trying to delete a film that doesn't exist
         response = test_client.delete(f'api/films/7878787', headers=auth_header)
 
         assert response.status_code == 404
@@ -161,6 +165,7 @@ class TestFilm:
         assert b'Ninja Scroll' in response.data
 
     def test_filter(self, test_client):
+        # here different sorting algorithms are being tested
         response = test_client.get('api/films/filter', json={
             'algo': 'year', 'start_year': 1990, 'end_year': 1990}, headers=auth_header)
 

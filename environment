@@ -1,0 +1,11 @@
+export FLASK_APP=main
+export FLASK_ENV=development
+
+export DB_USERNAME="nix"
+export DB_PASSWORD="1"
+
+export POSTGRES_HOST="localhost"
+export POSTGRES_PORT="5432"
+export POSTGRES_DB="films_db"
+
+DATABASE_URL=postgresql://nix:1@db:5432/films_db

@@ -3912,3 +3912,345 @@ flask_jwt_extended.exceptions.NoAuthorizationError: Missing Authorization Header
 2022-07-28 10:54:46,010 INFO flask_restx.namespace.films MainThread : A film Test film 1 was added to a database.
 2022-07-28 10:54:46,015 INFO flask_restx.namespace.films MainThread : A film Test film 1 was deleted from a database.
 2022-07-28 10:54:46,034 INFO flask_restx.namespace.films MainThread : Search request for: ninja
+2022-07-28 11:15:59,984 INFO project MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:15:59,996 INFO project MainThread : Search request for: None
+2022-07-28 11:16:00,168 INFO project MainThread : User admin logged in successfully.
+2022-07-28 11:16:00,172 INFO project MainThread : Failed login attempt: invalid username
+2022-07-28 11:16:00,233 INFO project MainThread : Failed login attempt: invalid password
+2022-07-28 11:16:00,312 INFO project MainThread : A new user with username userpytest was created.
+2022-07-28 11:16:00,339 INFO project MainThread : A film Test film_edited was edited successfully.
+2022-07-28 11:16:00,370 INFO project MainThread : A film was deleted from a database.
+2022-07-28 11:16:00,462 INFO flask_restx.namespace.auth MainThread : A new user api_test_user has signed up.
+2022-07-28 11:16:00,528 INFO flask_restx.namespace.auth MainThread : A user admin has logged in.
+2022-07-28 11:16:00,603 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:16:00,611 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:16:00,619 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:16:00,626 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:16:00,677 INFO flask_restx.namespace.films MainThread : Search request for: ninja
+2022-07-28 11:20:14,260 INFO project MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:20:14,271 INFO project MainThread : Search request for: None
+2022-07-28 11:20:14,443 INFO project MainThread : User admin logged in successfully.
+2022-07-28 11:20:14,447 INFO project MainThread : Failed login attempt: invalid username
+2022-07-28 11:20:14,508 INFO project MainThread : Failed login attempt: invalid password
+2022-07-28 11:20:14,589 INFO project MainThread : A new user with username userpytest was created.
+2022-07-28 11:20:14,613 INFO project MainThread : A film Test film_edited was edited successfully.
+2022-07-28 11:20:14,644 INFO project MainThread : A film was deleted from a database.
+2022-07-28 11:20:14,732 INFO flask_restx.namespace.auth MainThread : A new user api_test_user has signed up.
+2022-07-28 11:20:14,797 INFO flask_restx.namespace.auth MainThread : A user admin has logged in.
+2022-07-28 11:20:14,871 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:14,878 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:14,886 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:14,892 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:14,898 INFO flask_restx.namespace.films MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:20:14,904 INFO flask_restx.namespace.films MainThread : A film Test film 1 was deleted from a database.
+2022-07-28 11:20:14,921 INFO flask_restx.namespace.films MainThread : Search request for: ninja
+2022-07-28 11:20:37,617 INFO project MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:20:37,628 INFO project MainThread : Search request for: None
+2022-07-28 11:20:37,804 INFO project MainThread : User admin logged in successfully.
+2022-07-28 11:20:37,808 INFO project MainThread : Failed login attempt: invalid username
+2022-07-28 11:20:37,869 INFO project MainThread : Failed login attempt: invalid password
+2022-07-28 11:20:37,949 INFO project MainThread : A new user with username userpytest was created.
+2022-07-28 11:20:37,973 INFO project MainThread : A film Test film_edited was edited successfully.
+2022-07-28 11:20:38,003 INFO project MainThread : A film was deleted from a database.
+2022-07-28 11:20:38,092 INFO flask_restx.namespace.auth MainThread : A new user api_test_user has signed up.
+2022-07-28 11:20:38,178 INFO flask_restx.namespace.auth MainThread : A user admin has logged in.
+2022-07-28 11:20:38,252 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:38,259 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:38,267 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:38,273 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:38,279 INFO flask_restx.namespace.films MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:20:38,284 INFO flask_restx.namespace.films MainThread : A film Test film 1 was deleted from a database.
+2022-07-28 11:20:38,301 INFO flask_restx.namespace.films MainThread : Search request for: ninja
+2022-07-28 11:20:48,509 INFO project MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:20:48,526 INFO project MainThread : Search request for: None
+2022-07-28 11:20:48,707 INFO project MainThread : User admin logged in successfully.
+2022-07-28 11:20:48,712 INFO project MainThread : Failed login attempt: invalid username
+2022-07-28 11:20:48,773 INFO project MainThread : Failed login attempt: invalid password
+2022-07-28 11:20:48,851 INFO project MainThread : A new user with username userpytest was created.
+2022-07-28 11:20:48,876 INFO project MainThread : A film Test film_edited was edited successfully.
+2022-07-28 11:20:48,905 INFO project MainThread : A film was deleted from a database.
+2022-07-28 11:20:48,997 INFO flask_restx.namespace.auth MainThread : A new user api_test_user has signed up.
+2022-07-28 11:20:49,082 INFO flask_restx.namespace.auth MainThread : A user admin has logged in.
+2022-07-28 11:20:49,155 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:49,164 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:49,173 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:49,180 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:20:49,186 INFO flask_restx.namespace.films MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:20:49,230 INFO flask_restx.namespace.films MainThread : Search request for: ninja
+2022-07-28 11:23:52,026 INFO project MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:23:52,037 INFO project MainThread : Search request for: None
+2022-07-28 11:23:52,212 INFO project MainThread : User admin logged in successfully.
+2022-07-28 11:23:52,216 INFO project MainThread : Failed login attempt: invalid username
+2022-07-28 11:23:52,278 INFO project MainThread : Failed login attempt: invalid password
+2022-07-28 11:23:52,359 INFO project MainThread : A new user with username userpytest was created.
+2022-07-28 11:23:52,384 INFO project MainThread : A film Test film_edited was edited successfully.
+2022-07-28 11:23:52,419 INFO project MainThread : A film was deleted from a database.
+2022-07-28 11:23:52,513 INFO flask_restx.namespace.auth MainThread : A new user api_test_user has signed up.
+2022-07-28 11:23:52,598 INFO flask_restx.namespace.auth MainThread : A user admin has logged in.
+2022-07-28 11:23:52,671 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:23:52,679 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:23:52,686 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:23:52,693 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:23:52,697 ERROR project MainThread : Exception on /api/films/add [POST]
+Traceback (most recent call last):
+  File "/home/ilya/.local/share/virtualenvs/nix_flask-GIxB_71G/lib/python3.8/site-packages/flask/app.py", line 1517, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ilya/.local/share/virtualenvs/nix_flask-GIxB_71G/lib/python3.8/site-packages/flask/app.py", line 1503, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**req.view_args)
+  File "/home/ilya/.local/share/virtualenvs/nix_flask-GIxB_71G/lib/python3.8/site-packages/flask_restx/api.py", line 403, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ilya/.local/share/virtualenvs/nix_flask-GIxB_71G/lib/python3.8/site-packages/flask/views.py", line 84, in view
+    return current_app.ensure_sync(self.dispatch_request)(*args, **kwargs)
+  File "/home/ilya/.local/share/virtualenvs/nix_flask-GIxB_71G/lib/python3.8/site-packages/flask_restx/resource.py", line 49, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ilya/.local/share/virtualenvs/nix_flask-GIxB_71G/lib/python3.8/site-packages/flask_jwt_extended/view_decorators.py", line 154, in decorator
+    return current_app.ensure_sync(fn)(*args, **kwargs)
+  File "/home/ilya/PycharmProjects/nix_flask/project/api.py", line 248, in post
+    if json['genres']:
+KeyError: 'genres'
+2022-07-28 11:23:52,747 INFO flask_restx.namespace.films MainThread : Search request for: ninja
+2022-07-28 11:24:02,351 INFO project MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:24:02,363 INFO project MainThread : Search request for: None
+2022-07-28 11:24:02,544 INFO project MainThread : User admin logged in successfully.
+2022-07-28 11:24:02,549 INFO project MainThread : Failed login attempt: invalid username
+2022-07-28 11:24:02,611 INFO project MainThread : Failed login attempt: invalid password
+2022-07-28 11:24:02,691 INFO project MainThread : A new user with username userpytest was created.
+2022-07-28 11:24:02,714 INFO project MainThread : A film Test film_edited was edited successfully.
+2022-07-28 11:24:02,744 INFO project MainThread : A film was deleted from a database.
+2022-07-28 11:24:02,836 INFO flask_restx.namespace.auth MainThread : A new user api_test_user has signed up.
+2022-07-28 11:24:02,903 INFO flask_restx.namespace.auth MainThread : A user admin has logged in.
+2022-07-28 11:24:02,977 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:24:02,985 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:24:02,992 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:24:02,999 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:24:03,006 INFO flask_restx.namespace.films MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:24:03,013 INFO flask_restx.namespace.films MainThread : A film Test film 1 was deleted from a database.
+2022-07-28 11:24:03,062 INFO flask_restx.namespace.films MainThread : Search request for: ninja
+2022-07-28 11:25:17,690 INFO project MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:25:17,701 INFO project MainThread : Search request for: None
+2022-07-28 11:25:17,875 INFO project MainThread : User admin logged in successfully.
+2022-07-28 11:25:17,880 INFO project MainThread : Failed login attempt: invalid username
+2022-07-28 11:25:17,941 INFO project MainThread : Failed login attempt: invalid password
+2022-07-28 11:25:18,021 INFO project MainThread : A new user with username userpytest was created.
+2022-07-28 11:25:18,045 INFO project MainThread : A film Test film_edited was edited successfully.
+2022-07-28 11:25:18,077 INFO project MainThread : A film was deleted from a database.
+2022-07-28 11:25:18,167 INFO flask_restx.namespace.auth MainThread : A new user api_test_user has signed up.
+2022-07-28 11:25:18,233 INFO flask_restx.namespace.auth MainThread : A user admin has logged in.
+2022-07-28 11:25:18,305 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:25:18,313 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:25:18,321 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:25:18,327 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:25:18,334 INFO flask_restx.namespace.films MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:25:18,339 INFO flask_restx.namespace.films MainThread : A film Test film 1 was deleted from a database.
+2022-07-28 11:25:18,357 INFO flask_restx.namespace.films MainThread : Search request for: ninja
+2022-07-28 11:25:21,930 INFO project MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:25:21,941 INFO project MainThread : Search request for: None
+2022-07-28 11:25:22,122 INFO project MainThread : User admin logged in successfully.
+2022-07-28 11:25:22,126 INFO project MainThread : Failed login attempt: invalid username
+2022-07-28 11:25:22,187 INFO project MainThread : Failed login attempt: invalid password
+2022-07-28 11:25:22,265 INFO project MainThread : A new user with username userpytest was created.
+2022-07-28 11:25:22,289 INFO project MainThread : A film Test film_edited was edited successfully.
+2022-07-28 11:25:22,319 INFO project MainThread : A film was deleted from a database.
+2022-07-28 11:25:22,413 INFO flask_restx.namespace.auth MainThread : A new user api_test_user has signed up.
+2022-07-28 11:25:22,479 INFO flask_restx.namespace.auth MainThread : A user admin has logged in.
+2022-07-28 11:25:22,552 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:25:22,561 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:25:22,569 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:25:22,576 INFO flask_restx.namespace.films MainThread : A film Mad Max was edited successfully.
+2022-07-28 11:25:22,582 INFO flask_restx.namespace.films MainThread : A film Test film 1 was added to a database.
+2022-07-28 11:25:22,587 INFO flask_restx.namespace.films MainThread : A film Test film 1 was deleted from a database.
+2022-07-28 11:25:22,605 INFO flask_restx.namespace.films MainThread : Search request for: ninja
+2022-07-28 15:45:21,911 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-28 15:45:21,911 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-28 15:45:22,163 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-28 15:45:22,164 INFO werkzeug MainThread :  * Debugger PIN: 102-469-448
+2022-07-31 08:03:45,135 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 08:03:45,136 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 08:03:45,400 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 08:03:45,444 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 12:34:41,292 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 12:34:41,293 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 12:34:41,544 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 12:34:41,544 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 14:22:32,081 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 14:22:32,081 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 14:22:32,325 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 14:22:32,325 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 14:22:39,754 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 14:22:39,755 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 14:22:39,992 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 14:22:39,992 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 14:22:44,031 INFO werkzeug MainThread :  * Detected change in '/home/ilya/PycharmProjects/nix_flask/project/__init__.py', reloading
+2022-07-31 14:22:44,082 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 14:22:44,351 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 14:22:44,351 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 14:22:45,555 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 14:22:45,556 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 14:22:45,809 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 14:22:45,809 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 14:40:16,682 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 14:40:16,682 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 14:40:16,932 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 14:40:16,933 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 14:52:39,661 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 14:52:39,662 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 14:52:39,919 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 14:52:39,919 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 14:56:45,554 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 14:56:45,554 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 14:56:45,802 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 14:56:45,803 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 14:58:09,499 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 14:58:09,499 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 14:58:09,751 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 14:58:09,752 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 14:59:52,300 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 14:59:52,300 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 14:59:52,552 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 14:59:52,552 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 15:19:00,179 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 15:19:00,179 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 15:19:00,429 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 15:19:00,429 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 15:31:03,940 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 15:31:03,941 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 15:31:04,198 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 15:31:04,199 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 15:33:19,161 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 15:33:19,162 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 15:33:19,435 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 15:33:19,436 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 15:33:34,081 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 15:33:34,081 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 15:33:34,333 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 15:33:34,333 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 15:33:58,861 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 15:33:58,861 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 15:33:59,112 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 15:33:59,112 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 15:36:41,825 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 15:36:41,826 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 15:36:42,099 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 15:36:42,100 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 15:37:58,417 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 15:37:58,418 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 15:37:58,671 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 15:37:58,672 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 15:39:32,625 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 15:39:32,626 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 15:39:32,890 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 15:39:32,890 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 17:16:31,410 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 17:16:31,410 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 17:16:31,671 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 17:16:31,671 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-07-31 17:20:48,062 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-07-31 17:20:48,062 INFO werkzeug MainThread :  * Restarting with stat
+2022-07-31 17:20:48,313 WARNING werkzeug MainThread :  * Debugger is active!
+2022-07-31 17:20:48,314 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-08-01 09:03:00,947 INFO werkzeug MainThread :  * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)
+2022-08-01 09:03:00,947 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-01 09:03:01,196 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-01 09:03:01,196 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-08-02 13:34:59,616 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-02 13:34:59,617 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-02 13:34:59,913 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-02 13:34:59,913 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-08-03 11:58:55,230 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-03 11:58:55,231 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-03 11:58:55,491 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-03 11:58:55,491 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-08-03 11:59:03,141 INFO werkzeug Thread-2 : 127.0.0.1 - - [03/Aug/2022 11:59:03] "GET / HTTP/1.1" 200 -
+2022-08-03 11:59:17,170 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-03 11:59:17,170 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-03 11:59:17,426 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-03 11:59:17,426 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-08-03 11:59:23,273 INFO werkzeug Thread-2 : 127.0.0.1 - - [03/Aug/2022 11:59:23] "GET / HTTP/1.1" 200 -
+2022-08-03 11:59:24,932 INFO werkzeug Thread-3 : 127.0.0.1 - - [03/Aug/2022 11:59:24] "GET /login HTTP/1.1" 200 -
+2022-08-03 11:59:25,651 INFO werkzeug Thread-4 : 127.0.0.1 - - [03/Aug/2022 11:59:25] "GET / HTTP/1.1" 200 -
+2022-08-03 11:59:38,546 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-03 11:59:38,547 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-03 11:59:38,805 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-03 11:59:38,805 INFO werkzeug MainThread :  * Debugger PIN: 102-384-122
+2022-08-04 11:31:31,504 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-04 11:31:31,505 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-04 11:31:31,751 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-04 11:31:31,792 INFO werkzeug MainThread :  * Debugger PIN: 338-665-914
+2022-08-04 11:32:16,994 INFO werkzeug Thread-2 : 127.0.0.1 - - [04/Aug/2022 11:32:16] "GET / HTTP/1.1" 200 -
+2022-08-04 11:32:18,202 INFO werkzeug Thread-3 : 127.0.0.1 - - [04/Aug/2022 11:32:18] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2022-08-04 16:43:49,441 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-04 16:43:49,442 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-04 16:43:49,692 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-04 16:43:49,692 INFO werkzeug MainThread :  * Debugger PIN: 338-665-914
+2022-08-04 17:44:28,515 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-04 17:44:28,516 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-04 17:44:28,761 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-04 17:44:28,762 INFO werkzeug MainThread :  * Debugger PIN: 338-665-914
+2022-08-04 17:44:53,150 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-04 17:44:53,151 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-04 17:44:53,404 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-04 17:44:53,405 INFO werkzeug MainThread :  * Debugger PIN: 338-665-914
+2022-08-04 17:46:24,148 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-04 17:46:24,148 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-04 17:46:24,397 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-04 17:46:24,398 INFO werkzeug MainThread :  * Debugger PIN: 338-665-914
+2022-08-04 17:46:40,026 INFO werkzeug Thread-2 : 127.0.0.1 - - [04/Aug/2022 17:46:40] "GET / HTTP/1.1" 200 -
+2022-08-04 18:40:11,425 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-04 18:40:11,426 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-04 18:40:11,683 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-04 18:40:11,683 INFO werkzeug MainThread :  * Debugger PIN: 338-665-914
+2022-08-05 17:44:48,574 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-05 17:44:48,575 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-05 17:44:48,834 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-05 17:44:48,834 INFO werkzeug MainThread :  * Debugger PIN: 338-665-914
+2022-08-05 17:44:51,497 INFO werkzeug Thread-2 : 127.0.0.1 - - [05/Aug/2022 17:44:51] "GET / HTTP/1.1" 200 -
+2022-08-07 16:51:50,899 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-07 16:51:50,900 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-07 16:51:51,180 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-07 16:51:51,180 INFO werkzeug MainThread :  * Debugger PIN: 338-665-914
+2022-08-07 20:09:02,849 INFO werkzeug MainThread :  * Running on all addresses (0.0.0.0)
+   WARNING: This is a development server. Do not use it in a production deployment.
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.0.28:5000 (Press CTRL+C to quit)
+2022-08-07 20:09:02,850 INFO werkzeug MainThread :  * Restarting with stat
+2022-08-07 20:09:03,139 WARNING werkzeug MainThread :  * Debugger is active!
+2022-08-07 20:09:03,140 INFO werkzeug MainThread :  * Debugger PIN: 338-665-914
+2022-08-07 20:09:05,814 INFO werkzeug Thread-2 : 127.0.0.1 - - [07/Aug/2022 20:09:05] "GET / HTTP/1.1" 200 -
+2022-08-07 20:09:06,707 INFO werkzeug Thread-3 : 127.0.0.1 - - [07/Aug/2022 20:09:06] "GET / HTTP/1.1" 200 -
+2022-08-07 20:09:29,488 INFO werkzeug Thread-4 : 127.0.0.1 - - [07/Aug/2022 20:09:29] "GET / HTTP/1.1" 200 -

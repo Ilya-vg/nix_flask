@@ -1,0 +1,47 @@
+version: '3.7'
+
+services:
+  app:
+    build: .
+    depends_on:
+      - db
+    expose:
+      - "5000"
+#    environment:
+#      - DATABASE_URL=postgresql://postgres@db:5432/postgres
+#      - POSTGRES_PASSWORD=1
+    volumes:
+      - ./:/usr/src/app
+    restart: always
+    networks:
+      main:
+
+  db:
+    environment:
+      # - DATABASE_URL=postgresql://postgres:1@db:5432/postgres
+      - POSTGRES_PASSWORD=1
+    image: postgres:12.11-alpine
+    ports:
+      - "5432"
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/12/db
+    networks:
+      main:
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "1337:80"
+    depends_on:
+      - app
+    links:
+      - app
+    networks:
+      main:
+
+volumes:
+  postgres_data:
+
+networks:
+  main:

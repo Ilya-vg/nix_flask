@@ -8,7 +8,6 @@ flask = "*"
 flask-login = "*"
 flask-sqlalchemy = "*"
 psycopg2-binary = "*"
-werkzeug = "*"
 jinja2 = "*"
 flask-wtf = "*"
 flask-bootstrap = "*"
@@ -20,6 +19,8 @@ sqlalchemy = "*"
 coverage = "*"
 flask-restx = "*"
 flask-jwt-extended = "*"
+gunicorn = "*"
+werkzeug = "==2.1.2"
 
 [dev-packages]
 

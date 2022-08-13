@@ -245,7 +245,7 @@ class Add(Resource):
 
         db.session.add(add_film)
 
-        if 'genre' in json:
+        if json['genre']:
             for g in json['genre']:
                 db.session.add(
                     MovieGenre(genres_list.index(g) + 1, add_film.id)

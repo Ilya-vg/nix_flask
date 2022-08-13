@@ -35,17 +35,14 @@ def home():
         if not current_user.is_authenticated:
             flash('Please log in to add new films to the database', category='error')
         else:
-            db.session.add(
-                Movie(title, director, year_release, description,
-                      rating, poster, current_user.get_username())
-            )
+            film = Movie(title=title, director=director, year_release=year_release,
+                         description=description, rating=rating, poster=poster,
+                         added_by=current_user.get_username())
 
-            new_film_id = db.session.query(func.max(Movie.id)).scalar()
+            db.session.add(film)
 
             for g in genre:
-                db.session.add(
-                    MovieGenre(genres_list.index(g) + 1, new_film_id)
-                )
+                db.session.add(MovieGenre(genres_list.index(g) + 1, film.id))
 
             db.session.commit()
 

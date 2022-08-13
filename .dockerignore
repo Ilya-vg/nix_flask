@@ -1,0 +1,6 @@
+# exclude all tests
+test*
+.coverage
+
+nginx
+.pytest_cache

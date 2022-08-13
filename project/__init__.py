@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
@@ -15,11 +17,17 @@ logging.basicConfig(filename='record.log', level=logging.DEBUG,
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '1'
-app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://nix:1@localhost/{DB_NAME}'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["JWT_SECRET_KEY"] = "2"
 app.config['JWT_TOKEN_LOCATION'] = ['headers']
 app.config['ERROR_404_HELP'] = False
+
+its_container_bro = os.environ.get('AM_I_IN_A_DOCKER_CONTAINER', False)
+
+if its_container_bro:
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:1@db:5432/postgres'
+else:
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'postgresql://nix:1@localhost/{DB_NAME}'
 
 jwt = JWTManager(app)
 
@@ -40,6 +48,7 @@ login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 
 with app.app_context():
+    db.drop_all()
     db.create_all()
 
 
