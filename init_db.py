@@ -1,12 +1,31 @@
 from project import db, User, app, genres_list
 from werkzeug.security import generate_password_hash
-from project.models import Movie, MovieGenre
+from project.models import Movie, MovieGenre, Genre
 
+# SQL code to add genres
+
+'''
+INSERT INTO genre (id, genre)
+VALUES 
+        (1, 'action'), (2, 'thriller'), (3, 'comedy'), (4, 'drama'), (5, 'sci-fi');
+
+INSERT INTO movie (title, director, year_release, description, rating, poster, added_by)
+VALUES 
+        ('Mad Max', 'George Miller', '1979', 'Mad Max is an Australian post-apocalyptic action film series',
+        '9', 'https://en.wikipedia.org/wiki/Mad_Max_(film)#/media/File:MadMazAus.jpg', 'admin');
+
+INSERT INTO movie_genre (genre_id, movie_id)
+VALUES
+        (1,1);        
+'''
 
 with app.app_context():
     # initialize database
     db.drop_all()
     db.create_all()
+
+    for g in genres_list:
+        db.session.add(Genre(genre=g))
 
     # Insert data into the table
     db.session.add(User(username='admin',
@@ -60,11 +79,3 @@ with app.app_context():
     db.session.add(MovieGenre(genres_list.index('comedy') + 1, film.id))
 
     db.session.commit()
-
-# SQL code to add genres
-
-'''
-INSERT INTO genre (genre)
-VALUES 
-        ('action'), ('thriller'), ('comedy'), ('drama'), ('sci-fi');
-'''

@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect
 from flask_login import login_required, current_user
-from sqlalchemy import func
 
 from . import db, genres_list
 from .models import Movie, MovieGenre, Genre
