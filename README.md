@@ -6,6 +6,7 @@ Steps to start working with the app after you cloned this repo:
 2. get inside the running database container with the command **docker exec {container_id} psql -U postgres**
 3. now check the **insert_db.py** file in a project directory. execute first sql command that is commented at the start of this file.
    it will add genres in genre table.
+4. create new user and log in.
    
 Now it's all set for you to run your dockerized copy of app on you machine. There's a /api URL with API functionality as well.
 
